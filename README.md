@@ -43,6 +43,16 @@ Add to your Cursor MCP settings (`.cursor/mcp.json` or IDE settings):
 | `CACHE_TTL_MS` | No | `300000` | Schema resolver cache TTL (5 min) |
 | `REQUEST_TIMEOUT_MS` | No | `30000` | HTTP request timeout (30s) |
 
+### Pipefy Context (optional but recommended)
+
+Copy the example context file and fill in your real IDs:
+
+```bash
+cp PIPEFY_CONTEXT.example.md PIPEFY_CONTEXT.md
+```
+
+This file stores your organization, pipe, and database IDs for quick reference by AI agents and developers. It is listed in `.gitignore` and will never be committed.
+
 ## Architecture
 
 ```
