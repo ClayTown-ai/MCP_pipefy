@@ -9,7 +9,7 @@ export function registerGetOrganizationSettings(server: McpServer) {
   server.tool("get_organization_settings", "Get organization advanced settings (SSO, branding, provisioning)",
     { id: z.string().describe("Organization ID") },
     async ({ id }) => {
-      try { const data = await pipefyRequest<{ organizationSettings: any }>(Q_ORGANIZATION_SETTINGS, { id }); return jsonResult(data.organizationSettings); }
+      try { const data = await pipefyRequest<{ organizationSettings: any }>(Q_ORGANIZATION_SETTINGS, { id }); if (!data.organizationSettings) return errorResult("NOT_FOUND", `Organization settings for ${id} not found`); return jsonResult(data.organizationSettings); }
       catch (e) { if (e instanceof PipefyApiError) return errorResult(e.type, e.message); throw e; }
     });
 }

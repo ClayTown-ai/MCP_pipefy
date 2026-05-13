@@ -13,6 +13,7 @@ export function registerGetTable(server: McpServer) {
     async ({ id }) => {
       try {
         const data = await pipefyRequest<{ table: any }>(Q_TABLE, { id });
+        if (!data.table) return errorResult("NOT_FOUND", `Table ${id} not found`);
         return jsonResult(data.table);
       } catch (e) {
         if (e instanceof PipefyApiError) return errorResult(e.type, e.message);

@@ -13,6 +13,7 @@ export function registerGetPipe(server: McpServer) {
     async ({ id }) => {
       try {
         const data = await pipefyRequest<{ pipe: any }>(Q_PIPE, { id });
+        if (!data.pipe) return errorResult("NOT_FOUND", `Pipe ${id} not found`);
         return jsonResult(data.pipe);
       } catch (e) {
         if (e instanceof PipefyApiError) return errorResult(e.type, e.message);

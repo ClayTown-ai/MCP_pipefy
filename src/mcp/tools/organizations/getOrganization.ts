@@ -9,7 +9,7 @@ export function registerGetOrganization(server: McpServer) {
   server.tool("get_organization", "Get organization details (name, members, pipes, plan, SSO settings)",
     { id: z.string().describe("Organization ID") },
     async ({ id }) => {
-      try { const data = await pipefyRequest<{ organization: any }>(Q_ORGANIZATION, { id }); return jsonResult(data.organization); }
+      try { const data = await pipefyRequest<{ organization: any }>(Q_ORGANIZATION, { id }); if (!data.organization) return errorResult("NOT_FOUND", `Organization ${id} not found`); return jsonResult(data.organization); }
       catch (e) { if (e instanceof PipefyApiError) return errorResult(e.type, e.message); throw e; }
     });
 }

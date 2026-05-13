@@ -13,6 +13,7 @@ export function registerGetCard(server: McpServer) {
     async ({ id }) => {
       try {
         const data = await pipefyRequest<{ card: any }>(Q_CARD, { id });
+        if (!data.card) return errorResult("NOT_FOUND", `Card ${id} not found`);
         const c = data.card;
         return jsonResult({
           id: c.id,

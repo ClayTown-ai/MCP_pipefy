@@ -13,6 +13,7 @@ export function registerGetRecord(server: McpServer) {
     async ({ id }) => {
       try {
         const data = await pipefyRequest<{ table_record: any }>(Q_TABLE_RECORD, { id });
+        if (!data.table_record) return errorResult("NOT_FOUND", `Record ${id} not found`);
         const r = data.table_record;
         return jsonResult({
           ...r,

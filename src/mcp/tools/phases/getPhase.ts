@@ -13,6 +13,7 @@ export function registerGetPhase(server: McpServer) {
     async ({ id }) => {
       try {
         const data = await pipefyRequest<{ phase: any }>(Q_PHASE, { id });
+        if (!data.phase) return errorResult("NOT_FOUND", `Phase ${id} not found`);
         return jsonResult(data.phase);
       } catch (e) {
         if (e instanceof PipefyApiError) return errorResult(e.type, e.message);
