@@ -8,7 +8,7 @@ async function main() {
   const server = createServer();
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  logger.info("Pipefy MCP Server running on stdio (102 tools registered)");
+  logger.info("Pipefy MCP Server running on stdio (167 tools registered)");
 }
 
 main().catch((err) => {

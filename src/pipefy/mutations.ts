@@ -154,3 +154,57 @@ export const M_SET_SUMMARY_ATTRIBUTES = `mutation ($input: SetSummaryAttributesI
 export const M_SET_TABLE_FIELD_ORDER = `mutation ($input: SetTableFieldOrderInput!) { setTableFieldOrder(input: $input) { clientMutationId } }`;
 
 export const M_SET_FAVORITE_PIPES = `mutation ($input: SetFavoritePipesInput!) { setFavoritePipes(input: $input) { clientMutationId success } }`;
+
+// --- Automations ---
+export const M_CREATE_AUTOMATION = `mutation ($input: CreateAutomationInput!) { createAutomation(input: $input) { automation { id name active } } }`;
+
+export const M_UPDATE_AUTOMATION = `mutation ($input: UpdateAutomationInput!) { updateAutomation(input: $input) { automation { id name active } } }`;
+
+export const M_DELETE_AUTOMATION = `mutation ($input: DeleteAutomationInput!) { deleteAutomation(input: $input) { clientMutationId success } }`;
+
+export const M_CREATE_AUTOMATION_SIMULATION = `mutation ($input: CreateAutomationSimulationInput!) { createAutomationSimulation(input: $input) { automationSimulation { id status } } }`;
+
+// --- AI Automations ---
+export const M_CREATE_AI_AUTOMATION = `mutation ($input: CreateAiAutomationInput!) { createAiAutomation(input: $input) { aiAutomation { id name prompt active } } }`;
+
+export const M_UPDATE_AI_AUTOMATION = `mutation ($input: UpdateAiAutomationInput!) { updateAiAutomation(input: $input) { aiAutomation { id name prompt active } } }`;
+
+export const M_DELETE_AI_AUTOMATION = `mutation ($input: DeleteAiAutomationInput!) { deleteAiAutomation(input: $input) { clientMutationId success } }`;
+
+// --- AI Agents ---
+export const M_CREATE_AI_AGENT = `mutation ($input: CreateAiAgentInput!) { createAiAgent(input: $input) { aiAgent { uuid name active } } }`;
+
+export const M_UPDATE_AI_AGENT = `mutation ($input: UpdateAiAgentInput!) { updateAiAgent(input: $input) { aiAgent { uuid name active instruction behaviors { id type config } } } }`;
+
+export const M_TOGGLE_AI_AGENT_STATUS = `mutation ($uuid: String!, $active: Boolean!) { updateAiAgentStatus(input: { uuid: $uuid, active: $active }) { aiAgent { uuid active } } }`;
+
+export const M_DELETE_AI_AGENT = `mutation ($uuid: String!) { deleteAiAgent(input: { uuid: $uuid }) { clientMutationId success } }`;
+
+// --- Observability ---
+export const M_EXPORT_AUTOMATION_JOBS = `mutation ($input: CreateAutomationJobsExportInput!) { createAutomationJobsExport(input: $input) { automationJobsExport { id state } } }`;
+
+// --- Reports ---
+export const M_CREATE_PIPE_REPORT = `mutation ($input: CreatePipeReportInput!) { createPipeReport(input: $input) { pipeReport { id name } } }`;
+
+export const M_UPDATE_PIPE_REPORT = `mutation ($input: UpdatePipeReportInput!) { updatePipeReport(input: $input) { pipeReport { id name } } }`;
+
+export const M_DELETE_PIPE_REPORT = `mutation ($input: DeletePipeReportInput!) { deletePipeReport(input: $input) { clientMutationId success } }`;
+
+export const M_CREATE_ORGANIZATION_REPORT = `mutation ($input: CreateOrganizationReportInput!) { createOrganizationReport(input: $input) { organizationReport { id name } } }`;
+
+export const M_UPDATE_ORGANIZATION_REPORT = `mutation ($input: UpdateOrganizationReportInput!) { updateOrganizationReport(input: $input) { organizationReport { id name } } }`;
+
+export const M_DELETE_ORGANIZATION_REPORT = `mutation ($input: DeleteOrganizationReportInput!) { deleteOrganizationReport(input: $input) { clientMutationId success } }`;
+
+export const M_EXPORT_ORGANIZATION_REPORT = `mutation ($input: ExportOrganizationReportInput!) { exportOrganizationReport(input: $input) { clientMutationId } }`;
+
+export const M_EXPORT_PIPE_AUDIT_LOGS = `mutation ($input: ExportPipeAuditLogsInput!) { exportPipeAuditLogs(input: $input) { clientMutationId } }`;
+
+// --- Attachments ---
+export const M_CREATE_PRESIGNED_URL = `mutation ($input: CreatePresignedUrlInput!) { createPresignedUrl(input: $input) { url downloadUrl clientMutationId } }`;
+
+// --- Card Relations ---
+export const M_DELETE_CARD_RELATION = `mutation ($input: DeleteCardRelationInput!) { deleteCardRelation(input: $input) { clientMutationId success } }`;
+
+// --- Emails ---
+export const M_SEND_EMAIL_WITH_TEMPLATE = `mutation ($input: SendEmailWithTemplateInput!) { sendEmailWithTemplate(input: $input) { clientMutationId success } }`;

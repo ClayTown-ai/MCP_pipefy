@@ -138,6 +138,92 @@ import { registerSetTableFieldOrder } from "./tools/misc/setTableFieldOrder.js";
 // Groups
 import { registerListGroups } from "./tools/groups/listGroups.js";
 
+// Introspection tools
+import { registerIntrospectType } from "./tools/introspection/introspectType.js";
+import { registerIntrospectQuery } from "./tools/introspection/introspectQuery.js";
+import { registerIntrospectMutation } from "./tools/introspection/introspectMutation.js";
+import { registerSearchSchema } from "./tools/introspection/searchSchema.js";
+import { registerExecuteGraphql } from "./tools/introspection/executeGraphql.js";
+
+// Automation tools
+import { registerGetAutomation } from "./tools/automations/getAutomation.js";
+import { registerGetAutomations } from "./tools/automations/getAutomations.js";
+import { registerGetAutomationActions } from "./tools/automations/getAutomationActions.js";
+import { registerGetAutomationEvents } from "./tools/automations/getAutomationEvents.js";
+import { registerSimulateAutomation } from "./tools/automations/simulateAutomation.js";
+import { registerCreateAutomation } from "./tools/automations/createAutomation.js";
+import { registerCreateSendTaskAutomation } from "./tools/automations/createSendTaskAutomation.js";
+import { registerUpdateAutomation } from "./tools/automations/updateAutomation.js";
+import { registerDeleteAutomation } from "./tools/automations/deleteAutomation.js";
+
+// AI Automation tools
+import { registerGetAiAutomation } from "./tools/aiAutomations/getAiAutomation.js";
+import { registerGetAiAutomations } from "./tools/aiAutomations/getAiAutomations.js";
+import { registerCreateAiAutomation } from "./tools/aiAutomations/createAiAutomation.js";
+import { registerUpdateAiAutomation } from "./tools/aiAutomations/updateAiAutomation.js";
+import { registerDeleteAiAutomation } from "./tools/aiAutomations/deleteAiAutomation.js";
+import { registerValidateAiAutomationPrompt } from "./tools/aiAutomations/validateAiAutomationPrompt.js";
+
+// AI Agent tools
+import { registerGetAiAgent } from "./tools/aiAgents/getAiAgent.js";
+import { registerGetAiAgents } from "./tools/aiAgents/getAiAgents.js";
+import { registerCreateAiAgent } from "./tools/aiAgents/createAiAgent.js";
+import { registerUpdateAiAgent } from "./tools/aiAgents/updateAiAgent.js";
+import { registerToggleAiAgentStatus } from "./tools/aiAgents/toggleAiAgentStatus.js";
+import { registerDeleteAiAgent } from "./tools/aiAgents/deleteAiAgent.js";
+import { registerValidateAiAgentBehaviors } from "./tools/aiAgents/validateAiAgentBehaviors.js";
+
+// Observability tools
+import { registerGetAiAgentLogs } from "./tools/observability/getAiAgentLogs.js";
+import { registerGetAiAgentLogDetails } from "./tools/observability/getAiAgentLogDetails.js";
+import { registerGetAutomationLogs } from "./tools/observability/getAutomationLogs.js";
+import { registerGetAutomationLogsByRepo } from "./tools/observability/getAutomationLogsByRepo.js";
+import { registerGetAgentsUsage } from "./tools/observability/getAgentsUsage.js";
+import { registerGetAutomationsUsage } from "./tools/observability/getAutomationsUsage.js";
+import { registerGetAiCreditUsage } from "./tools/observability/getAiCreditUsage.js";
+import { registerExportAutomationJobs } from "./tools/observability/exportAutomationJobs.js";
+import { registerGetAutomationJobsExport } from "./tools/observability/getAutomationJobsExport.js";
+import { registerResolveOrgUuid } from "./tools/observability/getResolveOrgUuid.js";
+
+// Report tools
+import { registerGetPipeReports } from "./tools/reports/getPipeReports.js";
+import { registerGetPipeReport } from "./tools/reports/getPipeReport.js";
+import { registerGetPipeReportColumns } from "./tools/reports/getPipeReportColumns.js";
+import { registerGetPipeReportFilterableFields } from "./tools/reports/getPipeReportFilterableFields.js";
+import { registerCreatePipeReport } from "./tools/reports/createPipeReport.js";
+import { registerUpdatePipeReport } from "./tools/reports/updatePipeReport.js";
+import { registerDeletePipeReport } from "./tools/reports/deletePipeReport.js";
+import { registerGetOrganizationReport } from "./tools/reports/getOrganizationReport.js";
+import { registerGetOrganizationReports } from "./tools/reports/getOrganizationReports.js";
+import { registerCreateOrganizationReport } from "./tools/reports/createOrganizationReport.js";
+import { registerUpdateOrganizationReport } from "./tools/reports/updateOrganizationReport.js";
+import { registerDeleteOrganizationReport } from "./tools/reports/deleteOrganizationReport.js";
+import { registerExportOrganizationReport } from "./tools/reports/exportOrganizationReport.js";
+import { registerGetOrganizationReportExport } from "./tools/reports/getOrganizationReportExport.js";
+import { registerExportPipeAuditLogs } from "./tools/reports/exportPipeAuditLogs.js";
+
+// Attachment tools
+import { registerUploadAttachmentToCard } from "./tools/attachments/uploadAttachmentToCard.js";
+import { registerUploadAttachmentToTableRecord } from "./tools/attachments/uploadAttachmentToTableRecord.js";
+
+// Extra tools (Phase 8)
+import { registerGetStartFormFields } from "./tools/pipes/getStartFormFields.js";
+import { registerSearchPipes } from "./tools/pipes/searchPipes.js";
+import { registerGetPhaseFields } from "./tools/phases/getPhaseFields.js";
+import { registerGetPipeMembers } from "./tools/members/getPipeMembers.js";
+import { registerGetLabels } from "./tools/labels/getLabels.js";
+import { registerSearchTables } from "./tools/tables/searchTables.js";
+import { registerGetCardRelations } from "./tools/relations/getCardRelations.js";
+import { registerDeleteCardRelation } from "./tools/relations/deleteCardRelation.js";
+import { registerGetWebhooks } from "./tools/webhooks/getWebhooks.js";
+import { registerGetEmailTemplates } from "./tools/emails/getEmailTemplates.js";
+import { registerSendEmailWithTemplate } from "./tools/emails/sendEmailWithTemplate.js";
+
+// Gap-closing tools (parity with gbrlcustodio/pipefy-mcp-server)
+import { registerGetFieldConditions } from "./tools/fieldConditions/getFieldConditions.js";
+import { registerFillCardPhaseFields } from "./tools/cards/fillCardPhaseFields.js";
+import { registerGetAutomationJobsExportCsv } from "./tools/observability/getAutomationJobsExportCsv.js";
+
 export function createServer(): McpServer {
   const server = new McpServer({
     name: "pipefy",
@@ -275,6 +361,92 @@ export function createServer(): McpServer {
   registerSetSummaryAttributes(server);
   registerSetTableFieldOrder(server);
   registerListGroups(server);
+
+  // D16: Introspection & Raw GraphQL
+  registerIntrospectType(server);
+  registerIntrospectQuery(server);
+  registerIntrospectMutation(server);
+  registerSearchSchema(server);
+  registerExecuteGraphql(server);
+
+  // D17: Automations
+  registerGetAutomation(server);
+  registerGetAutomations(server);
+  registerGetAutomationActions(server);
+  registerGetAutomationEvents(server);
+  registerSimulateAutomation(server);
+  registerCreateAutomation(server);
+  registerCreateSendTaskAutomation(server);
+  registerUpdateAutomation(server);
+  registerDeleteAutomation(server);
+
+  // D18: AI Automations
+  registerGetAiAutomation(server);
+  registerGetAiAutomations(server);
+  registerCreateAiAutomation(server);
+  registerUpdateAiAutomation(server);
+  registerDeleteAiAutomation(server);
+  registerValidateAiAutomationPrompt(server);
+
+  // D19: AI Agents
+  registerGetAiAgent(server);
+  registerGetAiAgents(server);
+  registerCreateAiAgent(server);
+  registerUpdateAiAgent(server);
+  registerToggleAiAgentStatus(server);
+  registerDeleteAiAgent(server);
+  registerValidateAiAgentBehaviors(server);
+
+  // D20: Observability
+  registerGetAiAgentLogs(server);
+  registerGetAiAgentLogDetails(server);
+  registerGetAutomationLogs(server);
+  registerGetAutomationLogsByRepo(server);
+  registerGetAgentsUsage(server);
+  registerGetAutomationsUsage(server);
+  registerGetAiCreditUsage(server);
+  registerExportAutomationJobs(server);
+  registerGetAutomationJobsExport(server);
+  registerResolveOrgUuid(server);
+
+  // D21: Reports
+  registerGetPipeReports(server);
+  registerGetPipeReport(server);
+  registerGetPipeReportColumns(server);
+  registerGetPipeReportFilterableFields(server);
+  registerCreatePipeReport(server);
+  registerUpdatePipeReport(server);
+  registerDeletePipeReport(server);
+  registerGetOrganizationReport(server);
+  registerGetOrganizationReports(server);
+  registerCreateOrganizationReport(server);
+  registerUpdateOrganizationReport(server);
+  registerDeleteOrganizationReport(server);
+  registerExportOrganizationReport(server);
+  registerGetOrganizationReportExport(server);
+  registerExportPipeAuditLogs(server);
+
+  // D22: Attachments
+  registerUploadAttachmentToCard(server);
+  registerUploadAttachmentToTableRecord(server);
+
+  // D23: Extra tools (pipes, phases, members, labels, tables, relations, webhooks, emails)
+  registerGetStartFormFields(server);
+  registerSearchPipes(server);
+  registerGetPhaseFields(server);
+  registerGetPipeMembers(server);
+  registerGetLabels(server);
+  registerSearchTables(server);
+  registerGetCardRelations(server);
+  registerDeleteCardRelation(server);
+  registerGetWebhooks(server);
+  registerGetEmailTemplates(server);
+  registerSendEmailWithTemplate(server);
+
+  // D24: Gap-closing tools
+  registerGetFieldConditions(server);
+  registerFillCardPhaseFields(server);
+  registerGetAutomationJobsExportCsv(server);
 
   return server;
 }

@@ -5,8 +5,8 @@ import * as mutations from "../pipefy/mutations.js";
 describe("GraphQL query coverage", () => {
   const queryExports = Object.entries(queries).filter(([k]) => k.startsWith("Q_"));
 
-  it("has exactly 31 query constants", () => {
-    expect(queryExports).toHaveLength(31);
+  it("has at least 31 query constants", () => {
+    expect(queryExports.length).toBeGreaterThanOrEqual(31);
   });
 
   const expectedQueries = [

@@ -61,3 +61,91 @@ export const Q_PIPE_REPORT_EXPORT = `query ($id: ID!) { pipeReportExport(id: $id
 export const Q_REPO_ITEM_FORM = `query ($repoId: ID!, $throughConnectors: ReferenceConnectorFieldInput) { repoItemForm(repoId: $repoId, throughConnectors: $throughConnectors) { ... on CardForm { id name uuid icon color canBeManaged createButtonLabel } ... on TableRecordForm { id name uuid icon color canBeManaged createButtonLabel } } }`;
 
 export const Q_PLATFORM_APP_CONFIG = `query ($appSuid: ID!, $resourceType: String!, $resourceUuid: ID!) { platformAppConfiguration(appSuid: $appSuid, resourceType: $resourceType, resourceUuid: $resourceUuid) { fields { key value } } }`;
+
+// --- Introspection ---
+export const Q_INTROSPECT_TYPE = `query ($typeName: String!) { __type(name: $typeName) { name kind description fields { name description type { name kind ofType { name kind ofType { name kind ofType { name kind } } } } args { name description type { name kind ofType { name kind ofType { name kind } } } defaultValue } } inputFields { name description type { name kind ofType { name kind ofType { name kind ofType { name kind } } } } defaultValue } enumValues { name description isDeprecated deprecationReason } interfaces { name } possibleTypes { name } } }`;
+
+export const Q_INTROSPECT_QUERY_FIELDS = `query { __type(name: "Query") { fields { name description args { name description type { name kind ofType { name kind ofType { name kind } } } defaultValue } type { name kind ofType { name kind ofType { name kind } } } } } }`;
+
+export const Q_INTROSPECT_MUTATION_FIELDS = `query { __type(name: "Mutation") { fields { name description args { name description type { name kind ofType { name kind ofType { name kind } } } defaultValue } type { name kind ofType { name kind ofType { name kind } } } } } }`;
+
+export const Q_SCHEMA_TYPES = `query { __schema { types { name kind description } } }`;
+
+// --- Automations ---
+export const Q_AUTOMATION = `query ($id: ID!) { automation(id: $id) { id name active trigger { id type params } actions { id type params } conditions { id field_id operation value } createdAt updatedAt } }`;
+
+export const Q_AUTOMATIONS_BY_PIPE = `query ($pipeId: ID!) { automations(pipeId: $pipeId) { id name active trigger { id type } actions { id type } createdAt } }`;
+
+export const Q_AUTOMATION_ACTIONS = `query ($pipeId: ID!) { automationActions(pipeId: $pipeId) { id name description params { name type required description } } }`;
+
+export const Q_AUTOMATION_EVENTS = `query { automationEvents { id name description params { name type required description } } }`;
+
+export const Q_AUTOMATION_SIMULATION = `query ($id: ID!) { automationSimulation(id: $id) { id status result errors } }`;
+
+export const Q_PIPE_ORGANIZATION_ID = `query ($pipeId: ID!) { pipe(id: $pipeId) { id organization { id uuid } } }`;
+
+// --- AI Agent Logs & Observability ---
+export const Q_AI_AGENT_LOGS_BY_REPO = `query ($repoUuid: String!, $first: Int, $after: String) { aiAgentLogsByRepo(repoUuid: $repoUuid, first: $first, after: $after) { edges { node { id status createdAt completedAt cardId agentUuid } cursor } pageInfo { hasNextPage endCursor } } }`;
+
+export const Q_AI_AGENT_LOG_DETAILS = `query ($id: ID!) { aiAgentLog(id: $id) { id status createdAt completedAt cardId agentUuid tracingNodes { id type content timestamp } input output errors } }`;
+
+export const Q_AUTOMATION_LOGS = `query ($automationId: ID!, $first: Int, $after: String) { automationLogs(automationId: $automationId, first: $first, after: $after) { edges { node { id automationId status executedAt cardId error } cursor } pageInfo { hasNextPage endCursor } } }`;
+
+export const Q_AUTOMATION_LOGS_BY_REPO = `query ($repoId: ID!, $first: Int, $after: String) { automationLogsByRepo(repoId: $repoId, first: $first, after: $after) { edges { node { id automationId status executedAt cardId error } cursor } pageInfo { hasNextPage endCursor } } }`;
+
+export const Q_AGENTS_USAGE = `query ($organizationId: ID!) { agentsUsageDetails(organizationId: $organizationId) { totalCreditsUsed totalCreditsAvailable usageByAgent { agentUuid agentName creditsUsed } } }`;
+
+export const Q_AUTOMATIONS_USAGE = `query ($organizationId: ID!) { automationsUsageDetails(organizationId: $organizationId) { totalExecutions executionsByAutomation { automationId automationName executions } } }`;
+
+export const Q_AI_CREDIT_USAGE = `query ($organizationId: ID!) { aiCreditUsageStats(organizationId: $organizationId) { totalCredits usedCredits remainingCredits usageHistory { date creditsUsed } } }`;
+
+export const Q_AUTOMATION_JOBS_EXPORT = `query ($id: ID!) { automationJobsExport(id: $id) { id state fileURL startedAt finishedAt } }`;
+
+export const Q_RESOLVE_ORG_UUID = `query ($id: ID!) { organization(id: $id) { id uuid } }`;
+
+// --- AI Agents ---
+export const Q_AI_AGENT = `query ($uuid: String!) { aiAgent(uuid: $uuid) { uuid name instruction active repoUuid behaviors { id type config } createdAt updatedAt } }`;
+
+export const Q_AI_AGENTS = `query ($repoUuid: String!, $first: Int, $after: String) { aiAgents(repoUuid: $repoUuid, first: $first, after: $after) { edges { node { uuid name instruction active behaviors { id type config } createdAt } cursor } pageInfo { hasNextPage endCursor } } }`;
+
+// --- AI Automations ---
+export const Q_AI_AUTOMATION = `query ($id: ID!) { aiAutomation(id: $id) { id name prompt fieldIds condition active pipeId createdAt updatedAt } }`;
+
+export const Q_AI_AUTOMATIONS = `query ($pipeId: ID!) { aiAutomations(pipeId: $pipeId) { id name prompt active createdAt } }`;
+
+// --- Reports ---
+export const Q_PIPE_REPORTS = `query ($pipeUuid: String!, $first: Int, $after: String) { pipeReports(pipeUuid: $pipeUuid, first: $first, after: $after) { edges { node { id name createdAt updatedAt } cursor } pageInfo { hasNextPage endCursor } } }`;
+
+export const Q_PIPE_REPORT = `query ($id: ID!) { pipeReport(id: $id) { id name fields filters formulas createdAt updatedAt } }`;
+
+export const Q_PIPE_REPORT_COLUMNS = `query ($pipeId: ID!) { pipeReportColumns(pipeId: $pipeId) { id label fieldType } }`;
+
+export const Q_PIPE_REPORT_FILTERABLE_FIELDS = `query ($pipeId: ID!) { pipeReportFilterableFields(pipeId: $pipeId) { phaseId phaseName fields { id label fieldType } } }`;
+
+export const Q_ORGANIZATION_REPORT = `query ($id: ID!) { organizationReport(id: $id) { id name pipes { id name } fields filters createdAt updatedAt } }`;
+
+export const Q_ORGANIZATION_REPORTS = `query ($organizationId: ID!, $first: Int, $after: String) { organizationReports(organizationId: $organizationId, first: $first, after: $after) { edges { node { id name createdAt } cursor } pageInfo { hasNextPage endCursor } } }`;
+
+export const Q_ORGANIZATION_REPORT_EXPORT = `query ($id: ID!) { organizationReportExport(id: $id) { id state fileURL startedAt finishedAt } }`;
+
+// --- Pipe extras ---
+export const Q_START_FORM_FIELDS = `query ($pipeId: ID!) { pipe(id: $pipeId) { id start_form_fields { id label type required description options } } }`;
+
+export const Q_PHASE_FIELDS = `query ($phaseId: ID!) { phase(id: $phaseId) { id name fields { id label type required description options } } }`;
+
+export const Q_PIPE_MEMBERS = `query ($pipeId: ID!) { pipe(id: $pipeId) { id members { user { id name email } role_name } } }`;
+
+export const Q_PIPE_LABELS = `query ($pipeId: ID!) { pipe(id: $pipeId) { id labels { id name color } } }`;
+
+export const Q_SEARCH_PIPES = `query ($name: String!, $organizationId: ID) { pipes(name: $name, organizationId: $organizationId) { id name uuid organization { id name } } }`;
+
+export const Q_SEARCH_TABLES = `query ($name: String!, $organizationId: ID) { tables(name: $name, organizationId: $organizationId) { edges { node { id name uuid organization { id name } } } } }`;
+
+export const Q_CARD_RELATIONS = `query ($cardId: ID!) { card(id: $cardId) { id parent_relations { id name cards { id title } } child_relations { id name cards { id title } } } }`;
+
+export const Q_WEBHOOKS = `query ($pipeId: ID!) { pipe(id: $pipeId) { id webhooks { id name url actions headers { key value } } } }`;
+
+export const Q_EMAIL_TEMPLATES = `query ($pipeId: ID!) { pipe(id: $pipeId) { id emailTemplates { id name subject body toFieldId ccFieldId bccFieldId } } }`;
+
+// --- Field conditions (list by phase) ---
+export const Q_FIELD_CONDITIONS = `query ($phaseId: ID!) { phase(id: $phaseId) { id name fieldConditions { id name condition { expressions { field_address operation value } } actions { phaseFieldId action } } } }`;

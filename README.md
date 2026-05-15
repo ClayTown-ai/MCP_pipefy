@@ -1,6 +1,6 @@
 # Pipefy MCP Server
 
-MCP (Model Context Protocol) server providing **102 tools** for full Pipefy administration via Cursor. Covers **100% of the Pipefy GraphQL API** — all 31 queries and 69+ mutations organized across 15 domains.
+MCP (Model Context Protocol) server providing **167 tools** for full Pipefy administration via Cursor. Covers the Pipefy GraphQL API across **23 domains** — pipes, cards, tables, records, automations, AI automations, AI agents, observability, reports, introspection, attachments, and more.
 
 ## Quick Start
 
