@@ -137,7 +137,7 @@ export const Q_PIPE_MEMBERS = `query ($pipeId: ID!) { pipe(id: $pipeId) { id mem
 
 export const Q_PIPE_LABELS = `query ($pipeId: ID!) { pipe(id: $pipeId) { id labels { id name color } } }`;
 
-export const Q_SEARCH_PIPES = `query ($name: String!, $organizationId: ID) { pipes(name: $name, organizationId: $organizationId) { id name uuid organization { id name } } }`;
+export const Q_SEARCH_PIPES = `query ($organizationId: ID!) { organization(id: $organizationId) { pipes { id name uuid } } }`;
 
 export const Q_SEARCH_TABLES = `query ($name: String!, $organizationId: ID) { tables(name: $name, organizationId: $organizationId) { edges { node { id name uuid organization { id name } } } } }`;
 
